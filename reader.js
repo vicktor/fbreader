@@ -24,7 +24,7 @@ var fbreader={version:"0.1",
                 jQuery("#facebook").remove();
             jQuery(c).append('<span id="facebook" class="comment link unselectable"><span class="entry-comment-action-title">FaceBook</span></span>');
             jQuery("#facebook").css({
-                background:"url(http://sinkia.com/js/facebook_icon.png) no-repeat",paddingLeft:"14px"
+                background:"url(http://fbreader.googlecode.com/files/facebook_icon.png) no-repeat",paddingLeft:"14px"
             });
 
             jQuery(".entry-comment-action-title").bind("click",function(){
