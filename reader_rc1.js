@@ -25,7 +25,7 @@ var fbreader={version:"0.2",
                 jQuery("#delicious").remove();
             jQuery(c).append('<span id="facebook" class="link unselectable"><span class="entry-share-action-facebook">FaceBook</span></span>');
             jQuery("#facebook").css({
-                background:"url(http://fbreader.googlecode.com/files/facebook_icon.png) no-repeat",paddingLeft:"14px"
+                background:"url(http://fbreader.googlecode.com/files/facebook_icon.png) no-repeat",paddingLeft:"14px",marginLeft:"6px"
             });
 
             jQuery(c).append('<span id="delicious" class="link unselectable"><span class="entry-share-action-delicious">Delicious</span></span>');
