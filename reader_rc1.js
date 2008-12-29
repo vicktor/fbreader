@@ -35,12 +35,12 @@ var fbreader={version:"0.2",
 
             jQuery(".entry-share-action-facebook").bind("click",function(){
                 var u=jQuery("a.entry-title-link",jQuery("#current-entry")).attr("href");
-                window.open('http://www.facebook.com/share.php?u='+u,'_blank');
+                window.open('http://www.facebook.com/share.php?u='+escape(u),'_blank');
             });
             jQuery(".entry-share-action-delicious").bind("click",function(){
                 var u=jQuery("a.entry-title-link",jQuery("#current-entry")).attr("href");
                 var t=jQuery("a.entry-title-link",jQuery("#current-entry")).text();
-                window.open('http://del.icio.us/post?url='+u+'&title='+t, '_blank');
+                window.open('http://del.icio.us/post?url='+escape(u)+'&title='+t, '_blank');
             })
 
         },init:function(){
