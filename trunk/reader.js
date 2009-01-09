@@ -35,7 +35,6 @@ var fbreader={version:"0.2",
 
         if(jQuery("#current-entry").length>0)
             fbreader.addnewitems();
-<<<<<<< .mine
         jQuery(".entry").bind("click",fbreader.addnewitems);
 		}, 
     addnewitems:function(){
@@ -53,49 +52,13 @@ var fbreader={version:"0.2",
         	
         	jQuery(c).append('<span id="'+name+'" class="broadcast link unselectable"><span class="entry-share-action-'+name+'">'+name+'</span></span>');
         	jQuery("#" + name).css({background:"url("+ico+") no-repeat",paddingLeft:"14px"});
-=======
-            jQuery(".entry").bind("click",fbreader.addnewitems)
-        }, addnewitems:function(){
-            var b=jQuery("#current-entry");
-            var c=jQuery(".entry-actions",b);
-            if(jQuery("#facebook").length!=0)
-                jQuery("#facebook").remove();
-            if(jQuery("#delicious").length!=0)
-                jQuery("#delicious").remove();
-            jQuery(c).append('<span id="facebook" class="broadcast link unselectable"><span class="entry-share-action-facebook">FaceBook</span></span>');
-            jQuery("#facebook").css({
-                background:"url(http://fbreader.googlecode.com/files/facebook_icon.png) no-repeat",paddingLeft:"14px"
-            });
->>>>>>> .r11
 
-<<<<<<< .mine
           jQuery(".entry-share-action-"+name).bind("click",function(){
               var u=jQuery("a.entry-title-link",jQuery("#current-entry")).attr("href");
               var t=jQuery("a.entry-title-link",jQuery("#current-entry")).text();
               var shareUrl = slink.replace("%link%", escape(u)).replace("%title%", escape(t));
               window.open(shareUrl, '_blank');
           });
-=======
-            jQuery(c).append('<span id="delicious" class="broadcast link unselectable"><span class="entry-share-action-delicious">Delicious</span></span>');
-            jQuery("#delicious").css({
-                background:"url(http://fbreader.googlecode.com/files/delicious_icon.png) no-repeat",paddingLeft:"14px"
-            });
-
-            jQuery(".entry-share-action-facebook").bind("click",function(){
-                var u=jQuery("a.entry-title-link",jQuery("#current-entry")).attr("href");
-                window.open('http://www.facebook.com/share.php?u='+escape(u),'_blank');
-            });
-            jQuery(".entry-share-action-delicious").bind("click",function(){
-                var u=jQuery("a.entry-title-link",jQuery("#current-entry")).attr("href");
-                var t=jQuery("a.entry-title-link",jQuery("#current-entry")).text();
-                window.open('http://del.icio.us/post?url='+escape(u)+'&title='+t, '_blank');
-            })
-
-        },init:function(){
-            if(typeof jQuery!='function')
-                this.addScripts();
-            else this.cargando()
->>>>>>> .r11
         }
     },
     init:function(){
