@@ -5,60 +5,61 @@ var items = [
 		ico: "http://fbreader.googlecode.com/files/facebook_icon.png"
 	},
 	{
-		name: "Del.icio.us", 
-		slink: "http://del.icio.us/post?url=%link%&title=%title%",
+		name: "Delicious", 
+		slink: "http://delicious.com/post?url=%link%&title=%title%",
 		ico: "http://fbreader.googlecode.com/files/delicious_icon.png"
 	},
 	{
 		name: "Meneame", 
 		slink: "http://meneame.net/submit.php?url=%link%",
-		ico: "http://meneame.net/favicon.ico"
+		ico: "http://fbreader.googlecode.com/files/meneame.png"
 	}
 	];
 
 
-var fbreader={version:"0.2",
+var fbreader={version:"0.3", //modificada - Marcio Barrios
     addScripts:function(){
         if(typeof jQuery=='function')
             return;
         var s=document.createElement("script");
-        s.src='http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js?rand='+Math.random();
+		s.src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js?rand='+Math.random();
         s.type='text/javascript';
         s.setAttribute("id","script_fbreader");
         s.onload=s.onreadystatechange=this.cargando;
-        document.getElementsByTagName("head")[0].appendChild(s)
+        document.getElementsByTagName("head")[0].appendChild(s);
     },
     cargando:function(){
-        if(typeof jQuery!='function')
-            return;
+        if(typeof jQuery!='function') return;
         jQuery.noConflict();
-
-        if(jQuery("#current-entry").length>0)
-            fbreader.addnewitems();
-        jQuery(".entry").bind("click",fbreader.addnewitems);
-		}, 
+		
+		jQuery(".entry").live('mouseover',fbreader.addnewitems);
+		
+		jQuery('#message-area-inner').html('GReader Share cargado correctamente')
+		jQuery('#message-area-outer').addClass('info-message').removeClass('hidden');
+		setTimeout("jQuery('#message-area-outer').addClass('hidden')",3000);
+	}, 
     addnewitems:function(){
-        var b=jQuery("#current-entry");
-        var c=jQuery(".entry-actions",b);
+		var b = jQuery(this);
+		var c = jQuery(".entry-actions",b);
+		
+		if (b.find('.entry-share-action').length!=0) return;
+		else{
+			var u=jQuery("a.entry-title-link",b).attr("href");
+            var t=jQuery("a.entry-title-link",b).text();
+			
+            for (var x in items) {
+            	var name = items[x].name;
+        	    var slink = items[x].slink;
+				slink = slink.replace("%link%", escape(u)).replace("%title%", escape(t));
+            	var ico = items[x].ico;
+        	
+                jQuery(c).append('<span id="'+name+'" class="entry-share-action broadcast link unselectable" style="background:url('+ico+') no-repeat; padding-left:14px" rel="' + slink +  '">'+name+'</span>');
+            }
         
-        for (var x in items) {
-        	var name = items[x].name;
-					console.log("Name: " + name);
-					
-        	// if(jQuery("#" + name).length!=0) continue;
-        	
-        	var slink = items[x].slink;
-        	var ico = items[x].ico;
-        	
-        	jQuery(c).append('<span id="'+name+'" class="broadcast link unselectable"><span class="entry-share-action-'+name+'">'+name+'</span></span>');
-        	jQuery("#" + name).css({background:"url("+ico+") no-repeat",paddingLeft:"14px"});
-
-          jQuery(".entry-share-action-"+name).bind("click",function(){
-              var u=jQuery("a.entry-title-link",jQuery("#current-entry")).attr("href");
-              var t=jQuery("a.entry-title-link",jQuery("#current-entry")).text();
-              var shareUrl = slink.replace("%link%", escape(u)).replace("%title%", escape(t));
-              window.open(shareUrl, '_blank');
-          });
+            jQuery(".entry-share-action").unbind('click').bind("click",function(){
+                window.open(jQuery(this).attr('rel'), '_blank');
+				return false;
+            });
         }
     },
     init:function(){
@@ -68,4 +69,6 @@ var fbreader={version:"0.2",
     }
 };
 fbreader.init();
+
+
 
